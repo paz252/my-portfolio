@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: nomi-backend
+    env: docker
+    plan: free
+    branch: main
+    rootDir: nomi
+    numInstances: 1
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: RESUME_DOC_PATH
+        value: classpath:docs/resume-portfolio.md
+      - key: GEMINI_API_KEY
+        sync: false
