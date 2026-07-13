@@ -1,0 +1,356 @@
+/* ============================================
+   Dark theme — scoped to .chatbot-main-container
+   so it doesn't leak into the rest of the app
+   ============================================ */
+.chatbot-main-container {
+  --chat-bg: #212121;          /* main panel background */
+  --chat-bg-elevated: #2a2a2a; /* messages area */
+  --chat-bubble-ai: #2f2f2f;   /* AI bubble */
+  --chat-bubble-user: #343541; /* user bubble */
+  --chat-border: #3d3d3d;
+  --chat-text: #ececec;
+  --chat-text-muted: #9b9b9b;
+  --chat-accent: #d97757;      /* AI accent (Claude-style terracotta) */
+  --chat-accent-user: #8e7cf0; /* user accent */
+
+  background-color: var(--chat-bg);
+  border-color: var(--chat-border) !important;
+  color: var(--chat-text);
+  transition: height 0.35s ease, max-height 0.35s ease;
+}
+
+/* Before the first message: hug the content (one bubble + input bar), not the full panel */
+.chatbot-main-container.chatbot-initial {
+  height: auto;
+  max-height: 100%;
+  flex-grow: 0;
+}
+
+.chatbot-main-container.chatbot-initial .chat-messages {
+  flex-grow: 0;
+}
+
+/* After the first message: take over the full space permanently */
+.chatbot-main-container.chatbot-expanded {
+  height: 100%;
+}
+
+.chatbot-wrapper {
+  position: fixed;
+  bottom: 10vh;        /* sits above footer (footer ~8vh) */
+  right: 2vw;
+  z-index: 1100;       /* higher than footer */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.btn.chatbot-toggle {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: none;
+  transition: transform 0.3s ease;
+  background-color: var(--chat-accent, #d97757);
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.1);
+}
+
+.card.chatbot-window {
+  width: 25vw;
+  max-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.chatbot-main-container .chat-messages {
+  flex: 1;
+  min-height: 0; /* required so a flex child can shrink and actually scroll instead of growing the page */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--chat-bg-elevated) !important;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #565656;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #6e6e6e;
+}
+
+.chatbot-main-container .chat-messages-empty {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.chatbot-main-container .chat-welcome {
+  max-width: 90%;
+}
+
+.chatbot-main-container .chat-welcome-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--chat-text);
+  margin-bottom: 0.5rem;
+}
+
+.chatbot-main-container .chat-welcome-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--chat-text-muted);
+  margin: 0;
+}
+
+.chatbot-main-container .ai-msg {
+  background-color: var(--chat-bubble-ai);
+  align-self: flex-start;
+  max-width: 80%;
+  border: 1px solid var(--chat-border);
+  border-left: 0.3rem solid var(--chat-accent);
+  color: var(--chat-text);
+}
+
+.chatbot-main-container .user-msg {
+  background-color: var(--chat-bubble-user);
+  color: var(--chat-text);
+  align-self: flex-end;
+  max-width: 80%;
+  border: 1px solid var(--chat-border);
+  border-right: 0.3rem solid var(--chat-accent-user);
+}
+
+.chatbot-main-container .text-muted {
+  color: var(--chat-text-muted) !important;
+}
+
+.chatbot-main-container .markdown-content-body a {
+  color: var(--chat-accent);
+}
+
+.chatbot-main-container .markdown-content-body code {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f0b17a;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+.chatbot-main-container .markdown-content-body pre {
+  background-color: #1a1a1a;
+  border: 1px solid var(--chat-border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+
+/* Action buttons after AI response */
+.action-buttons {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.action-buttons .btn {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+}
+
+.chatbot-main-container .action-buttons .btn-outline-secondary {
+  color: var(--chat-text-muted);
+  border-color: var(--chat-border);
+  background-color: transparent;
+}
+
+.chatbot-main-container .action-buttons .btn-outline-secondary:hover {
+  color: var(--chat-text);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: var(--chat-text-muted);
+}
+
+.predefined-questions {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.predefined-questions .d-flex {
+  /* Flex wrap allows buttons to flow naturally */
+  flex-wrap: wrap;
+}
+
+.predefined-btn {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  white-space: nowrap;
+  /* Width fits content automatically with flex-wrap */
+}
+
+.chatbot-main-container .predefined-btn {
+  background-color: var(--chat-bubble-ai);
+  border: 1px solid var(--chat-border);
+  color: var(--chat-text);
+}
+
+.predefined-btn:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.chatbot-main-container .predefined-btn:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: var(--chat-accent);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(5vh); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Typing indicator animation */
+.typing-indicator {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #999;
+  animation: typing 1.4s infinite;
+}
+
+.chatbot-main-container .typing-indicator span {
+  background-color: var(--chat-text-muted);
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+}
+
+/* Footer / input area */
+.chatbot-main-container .card-footer {
+  background-color: var(--chat-bg) !important;
+  border-top: 1px solid var(--chat-border) !important;
+}
+
+.chatbot-main-container .form-control {
+  background-color: var(--chat-bubble-ai) !important;
+  border-color: var(--chat-border) !important;
+  color: var(--chat-text) !important;
+}
+
+.chatbot-main-container .form-control::placeholder {
+  color: var(--chat-text-muted);
+}
+
+.chatbot-main-container .form-control:focus {
+  background-color: var(--chat-bubble-ai) !important;
+  color: var(--chat-text) !important;
+  border-color: var(--chat-accent) !important;
+  box-shadow: 0 0 0 0.2rem rgba(217, 119, 87, 0.25) !important;
+}
+
+.chatbot-main-container .form-control:disabled {
+  background-color: var(--chat-bubble-ai) !important;
+  opacity: 0.6;
+}
+
+.chatbot-main-container .btn.bg-light {
+  background-color: var(--chat-bubble-ai) !important;
+  border-color: var(--chat-border) !important;
+}
+
+.chatbot-main-container .btn.text-secondary {
+  color: var(--chat-text-muted) !important;
+}
+
+.chatbot-main-container .btn.text-danger {
+  color: #ff6b6b !important;
+}
+
+.chatbot-main-container .btn-primary {
+  background-color: var(--chat-accent) !important;
+  border-color: var(--chat-accent) !important;
+}
+
+.chatbot-main-container .btn-primary:disabled {
+  opacity: 0.4;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .card.chatbot-window {
+    width: 90vw;
+    max-height: 60vh;
+  }
+  
+  .chatbot-wrapper {
+    right: 5vw;
+    bottom: 12vh;
+  }
+
+  .btn.chatbot-toggle {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .predefined-btn,
+  .action-buttons .btn {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .card.chatbot-window {
+    width: 35vw;
+  }
+}
