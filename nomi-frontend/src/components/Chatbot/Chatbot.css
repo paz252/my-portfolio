@@ -158,6 +158,29 @@
   visibility: visible;
 }
 
+.message-timestamp .copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--chat-text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.message-timestamp .copy-btn:focus {
+  outline: none;
+}
+
+.message-timestamp .copy-btn .bi {
+  font-size: 0.95rem;
+}
+
+.message-timestamp .copy-btn:hover {
+  color: var(--chat-text);
+}
+
 .chatbot-main-container .text-muted {
   color: var(--chat-text-muted) !important;
 }

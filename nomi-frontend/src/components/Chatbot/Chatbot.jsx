@@ -4,11 +4,20 @@ import api from '../../api/axiosConfig';
 import './Chatbot.css';
 
 export default function Chatbot({ guestName }) {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const stored = localStorage.getItem("nomiChatMessages");
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [hasExpanded, setHasExpanded] = useState(false); // becomes true once the first message is sent, resets on Clear History
+  const [copiedMessageIndex, setCopiedMessageIndex] = useState(null);
 
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
@@ -55,9 +64,42 @@ export default function Chatbot({ guestName }) {
     return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  const copyToClipboard = async (text, index) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopiedMessageIndex(index);
+        setTimeout(() => setCopiedMessageIndex(null), 1800);
+      } catch (e) {
+        console.error('Copy failed', e);
+      }
+    } else {
+      // fallback
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        setCopiedMessageIndex(index);
+        setTimeout(() => setCopiedMessageIndex(null), 1800);
+      } catch (e) {
+        console.error('Copy fallback failed', e);
+      }
+    }
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    localStorage.setItem("nomiChatMessages", JSON.stringify(messages));
+  }, [messages]);
 
   useEffect(() => {
     scrollToBottom();
@@ -136,7 +178,20 @@ export default function Chatbot({ guestName }) {
               </div>
             </div>
             <div className={`${msg.type === 'ai' ? 'text-start' : 'text-end'} message-timestamp text-muted small`}>
-              {msg.timestamp}
+              <span className="timestamp-text">{msg.timestamp}</span>
+              <button
+                type="button"
+                aria-label="Copy message"
+                className="copy-btn ms-2"
+                onClick={() => copyToClipboard(msg.text, index)}
+                title="Copy message"
+              >
+                {copiedMessageIndex === index ? (
+                  <i className="bi bi-clipboard-check-fill" />
+                ) : (
+                  <i className="bi bi-copy" />
+                )}
+              </button>
             </div>
           </div>
         ))}
