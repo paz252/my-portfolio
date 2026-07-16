@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About/About";
+import Skills from "./components/Skills/Skills";
+import Projects from "./components/Projects/Projects";
+import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer";
-import ContentArea from "./components/ContentArea";
 import WelcomeModal from "./components/WelcomeModal";
 
 export default function App() {
@@ -34,11 +38,30 @@ export default function App() {
 
   return (
     <>
-      <Header guestName={guestName} />
-
       <WelcomeModal isOpen={showWelcomeModal} onSubmit={handleNameSubmit} />
+      
+      <Navbar guestName={guestName} />
 
-      <ContentArea guestName={guestName} />
+      <section id="home">
+        <Hero guestName={guestName} />
+      </section>
+
+      <section id="about">
+        <About />
+      </section>
+
+      <section id="skills">
+        <Skills />
+      </section>
+
+      <section id="projects">
+        <Projects />
+      </section>
+
+      <section id="contact">
+        <Contact />
+      </section>
+
       <Footer />
     </>
   );

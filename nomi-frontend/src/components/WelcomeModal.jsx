@@ -31,7 +31,7 @@ export default function WelcomeModal({ isOpen, onSubmit }) {
           color: "#fff",
         }}
       >
-        <h2 className="mb-3 text-center">Welcome to Nomi</h2>
+        <h2 className="mb-3 text-center">Hello There!</h2>
         <p className="mb-3 text-center">What should I call you today?</p>
         <form onSubmit={handleSubmit}>
           <input

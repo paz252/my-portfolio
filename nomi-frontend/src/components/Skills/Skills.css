@@ -1,0 +1,113 @@
+.skills-section{
+    background: linear-gradient(135deg, #07070a 0%, #0f1116 100%);
+    overflow: hidden;
+}
+
+.skills-title{
+    font-size:3rem !important;
+    color:#ececec;
+}
+
+.skills-description{
+    max-width:650px;
+    color:#8B95A1;
+    line-height:1.7;
+    margin:0;
+}
+
+/* Marquee wrapper holding both rows */
+.skills-marquee{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.marquee-row{
+    overflow:hidden;
+    width:100%;
+    /* fade the edges so cards don't hard-cut at the container border */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+
+.marquee-track{
+    display:flex;
+    width:max-content;
+    gap:16px;
+}
+
+.marquee-ltr{
+    animation: marquee-ltr 28s linear infinite;
+}
+
+.marquee-rtl{
+    animation: marquee-rtl 28s linear infinite;
+}
+
+.marquee-row:hover .marquee-track{
+    animation-play-state: paused;
+}
+
+@keyframes marquee-ltr{
+    from{ transform: translateX(-50%); }
+    to{ transform: translateX(0); }
+}
+
+@keyframes marquee-rtl{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+}
+
+.skill-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:16px;
+    min-width:150px;
+    text-align:center;
+    border-radius:12px;
+    border:1px solid #232A33;
+    background:#12161B;
+    font-family:"JetBrains Mono", monospace;
+    transition:all .25s ease;
+    flex:none;
+}
+
+.skill-icon{
+    width:28px;
+    height:28px;
+    flex-shrink:0;
+    color:currentColor;
+    transition:transform .25s ease;
+}
+
+.skill-card:hover{
+    transform:translateY(-4px);
+    border-color:#a5b4fc;
+    color:#a5b4fc;
+    background:#151B20;
+    box-shadow:0 10px 25px rgba(79,216,168,.08);
+}
+
+.skill-card:hover .skill-icon{
+    transform:scale(1.2);
+    filter:drop-shadow(0 0 8px rgba(165, 180, 252, 0.7));
+}
+
+@media(max-width:768px){
+.skills-title{
+font-size:1.6rem;
+}
+
+.skill-card{
+    min-width:120px;
+    padding:12px;
+}
+
+.skill-icon{
+    width:22px;
+    height:22px;
+}
+}

@@ -1,0 +1,11 @@
+.nav-pill-btn {
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-pill-btn:hover,
+.nav-pill-btn.active {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}

@@ -1,0 +1,44 @@
+.metallic-text {
+  display: inline-block;
+
+  background:
+    linear-gradient(
+      var(--metallic-angle, 90deg),
+      transparent 0%,
+      transparent 44%,
+      rgba(255, 255, 255, 0.95) 50%,
+      transparent 56%,
+      transparent 100%
+    ),
+    linear-gradient(
+      var(--metallic-angle, 90deg),
+      #a5b4fc 0%,
+      #c4b5fd 25%,
+      #e9d5ff 50%,
+      #f5d0fe 75%,
+      #f0abfc 100%
+    );
+
+  background-repeat: no-repeat;
+  background-size: 250% 100%, 100% 100%;
+
+  /* Start shine outside left */
+  background-position: -150% 0, 0 0;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  animation: metallic-shine var(--metallic-period, 8s) linear infinite;
+}
+
+@keyframes metallic-shine {
+  from {
+    background-position: -150% 0, 0 0;
+  }
+
+  to {
+    background-position: 150% 0, 0 0;
+  }
+}
