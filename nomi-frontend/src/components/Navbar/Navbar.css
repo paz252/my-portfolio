@@ -9,3 +9,122 @@
   background-color: #ffffff !important;
   color: #000000 !important;
 }
+
+/* ---------- Burger button ---------- */
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+}
+
+.burger-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.burger-btn.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-btn.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Mobile dropdown menu ---------- */
+.mobile-menu {
+  display: none;
+}
+
+/* ---------- Responsive additions (mobile) ---------- */
+@media (max-width: 991.98px) {
+  .navbar {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    position: relative; /* containing block for .mobile-menu dropdown */
+  }
+
+  .navbar-brand {
+    justify-self: start;
+  }
+
+  .nav-pill-group {
+    display: none;
+  }
+
+  .burger-btn {
+    display: flex;
+    justify-self: center;
+  }
+
+  .guest-info {
+    justify-self: end;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #07070a 0%, #0f1116 100%);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .mobile-menu.show {
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  .mobile-menu-link {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .mobile-menu-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu-link:hover,
+  .mobile-menu-link.active {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mobile-menu-link {
+    padding: 0.8rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}

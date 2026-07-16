@@ -412,6 +412,8 @@
 
 @media (max-width: 992px) {
 
+  @media (max-width: 992px) {
+
   .hero-grid {
     grid-template-columns: 1fr;
   }
@@ -423,6 +425,17 @@
   .location-row {
     flex-direction: column;
   }
+
+  .avatar {
+    width: 55%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .avatar-col {
+    align-items: center;
+  }
+}
 }
 
 @media (max-width: 768px) {
@@ -437,6 +450,13 @@
 
   .avatar {
     height: 250px;
+    width: 50%;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .avatar-col {
+    align-items: center;
   }
 
   .about-section {

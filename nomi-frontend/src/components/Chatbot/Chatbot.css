@@ -348,13 +348,20 @@
   opacity: 0.4;
 }
 
-/* Mobile responsive */
+/* ============================================
+   Mobile responsive — chatbot content
+   ============================================ */
 @media (max-width: 768px) {
   .card.chatbot-window {
     width: 90vw;
     max-height: 60vh;
   }
-  
+   
+  .chatbot-main-container {
+    width: 98vw;
+    max-width: 98vw;
+  }
+
   .chatbot-wrapper {
     right: 5vw;
     bottom: 12vh;
@@ -370,10 +377,79 @@
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
   }
+
+  /* --- New additions below --- */
+
+  .chatbot-main-container.chatbot-expanded,
+  .chatbot-main-container {
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    margin-top: 0 !important;
+  }
+
+  .chatbot-header .chat-welcome-title {
+    font-size: 1.4rem !important;
+    padding: 0 0.5rem;
+  }
+
+  .chatbot-main-container .chat-messages-body {
+    padding: 0.65rem;
+  }
+
+  .chatbot-main-container .chat-welcome-title {
+    font-size: 1.15rem;
+  }
+
+  .chatbot-main-container .chat-welcome-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .chatbot-main-container .ai-msg,
+  .chatbot-main-container .user-msg {
+    max-width: 96%;
+    padding: 0.65rem 0.85rem !important;
+    font-size: 0.9rem;
+  }
+
+  /* Timestamps/copy button: hover doesn't exist on touch,
+     so keep them visible (dimmed) at all times on mobile */
+  .message-timestamp {
+    opacity: 0.6 !important;
+    visibility: visible !important;
+  }
+
+  .chat-footer {
+    padding: 0 0.65rem 0.65rem;
+  }
+
+  .chat-input-wrapper .form-control {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.85rem !important;
+  }
+
+  .chat-input-wrapper .btn {
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
-  .card.chatbot-window {
-    width: 35vw;
+@media (max-width: 420px) {
+  .chatbot-header .chat-welcome-title {
+    font-size: 1.15rem !important;
+  }
+
+  .chatbot-main-container {
+    width: 98vw;
+    max-width: 98vw;
+  }
+
+  .chatbot-main-container .ai-msg,
+  .chatbot-main-container .user-msg {
+    max-width: 100%;
   }
 }
