@@ -1,4 +1,4 @@
-name: Deploy NOMI React Frontend to GitHub Pages
+name: Deploy Portfolio React Frontend to GitHub Pages
 
 on:
   push:
