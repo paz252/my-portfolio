@@ -24,7 +24,6 @@ export default function MessageList({
         <Message
           key={index}
           message={message}
-          guestName={guestName}
           index={index}
           copiedMessageIndex={copiedMessageIndex}
           onCopy={onCopy}

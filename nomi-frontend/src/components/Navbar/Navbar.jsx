@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
 import MetallicText from "../utils/MetallicText";
+import resumePDF from "../../assets/amansaxena_resume.pdf";
 
-export default function Navbar({ guestName }) {
+export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -54,76 +55,64 @@ export default function Navbar({ guestName }) {
   const navLinks = ["home", "about", "skills", "projects", "contact"];
 
   return (
-  <nav
-    className="navbar sticky-top navbar-expand-lg py-3 ps-3 text-white fw-bold d-flex justify-content-between align-items-center"
-    style={{
-      background: "linear-gradient(135deg, #07070a 0%, #0f1116 100%)",
-      height: "8vh",
-    }}
-  >
-    <div className="navbar-brand mb-0 text-white">
-      <MetallicText period={8}>Aman Saxena</MetallicText>
-    </div>
-
-    {/* Desktop pill nav */}
-    <div className="nav-pill-group">
-      {navLinks.map((id) => (
-        <button
-          key={id}
-          className={`btn nav-pill-btn fw-bold ${
-            activeSection === id ? "active" : "text-white"
-          }`}
-          onClick={() => scrollToSection(id)}
-        >
-          {id.charAt(0).toUpperCase() + id.slice(1)}
-        </button>
-      ))}
-    </div>
-
-    {/* Burger button (mobile only) — direct child of nav for grid placement */}
-    <button
-      className={`burger-btn ${menuOpen ? "open" : ""}`}
-      aria-label="Toggle navigation menu"
-      aria-expanded={menuOpen}
-      onClick={() => setMenuOpen((prev) => !prev)}
+    <nav
+      className="navbar sticky-top navbar-expand-lg py-3 text-white fw-bold ps-3 pe-3 d-flex justify-content-between align-items-center"
+      style={{
+        background: "linear-gradient(135deg, #07070a 0%, #0f1116 100%)",
+        height: "8vh",
+      }}
     >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+      <div className="navbar-brand mb-0 text-white">
+        <MetallicText period={8}>Aman Saxena</MetallicText>
+      </div>
 
-    <div className="d-flex align-items-center gap-2 pe-3 guest-info">
-      {guestName && (
-        <>
-          <span
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              backgroundColor: "#4ade80",
-              boxShadow: "0 0 8px rgba(74, 222, 128, 0.8)",
-              display: "inline-block",
-            }}
-          />
-          <span className="small">Hi, {guestName}</span>
-        </>
-      )}
-    </div>
+      {/* Desktop pill nav */}
+      <div className="nav-pill-group">
+        {navLinks.map((id) => (
+          <button
+            key={id}
+            className={`btn nav-pill-btn fw-bold ${activeSection === id ? "active" : "text-white"
+              }`}
+            onClick={() => scrollToSection(id)}
+          >
+            {id.charAt(0).toUpperCase() + id.slice(1)}
+          </button>
+        ))}
+      </div>
 
-    {/* Mobile dropdown menu */}
-    <div className={`mobile-menu ${menuOpen ? "show" : ""}`}>
-      {navLinks.map((id) => (
-        <button
-          key={id}
-          className={`mobile-menu-link ${
-            activeSection === id ? "active" : ""
-          }`}
-          onClick={() => scrollToSection(id)}
-        >
-          {id.charAt(0).toUpperCase() + id.slice(1)}
-        </button>
-      ))}
-    </div>
-  </nav>
-);
+      {/* Burger button (mobile only) — direct child of nav for grid placement */}
+      <button
+        className={`burger-btn ${menuOpen ? "open" : ""}`}
+        aria-label="Toggle navigation menu"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((prev) => !prev)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href={resumePDF}
+        download="Aman_Saxena_Resume.pdf"
+        className="btn btn-sm btn-outline-light d-flex align-items-center gap-2 fw-bold download-resume-btn"
+      >
+        <i className="bi bi-download"></i>
+        <span>Download Resume</span>
+      </a>
+
+      {/* Mobile dropdown menu */}
+      <div className={`mobile-menu ${menuOpen ? "show" : ""}`}>
+        {navLinks.map((id) => (
+          <button
+            key={id}
+            className={`mobile-menu-link ${activeSection === id ? "active" : ""
+              }`}
+            onClick={() => scrollToSection(id)}
+          >
+            {id.charAt(0).toUpperCase() + id.slice(1)}
+          </button>
+        ))}
+      </div>
+    </nav>
+  );
 }

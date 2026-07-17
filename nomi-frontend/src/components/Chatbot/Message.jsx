@@ -2,7 +2,6 @@ import ReactMarkdown from "react-markdown";
 
 export default function Message({
   message,
-  guestName,
   index,
   copiedMessageIndex,
   onCopy,
@@ -16,9 +15,6 @@ export default function Message({
           isAI ? "ai-msg" : "user-msg"
         } p-3 rounded shadow-sm message-bubble`}
       >
-        <div className="text-uppercase tracking-wider font-monospace text-muted small opacity-75">
-          {isAI ? "Aman" : guestName || "You"}
-        </div>
 
         <div className="markdown-content-body text-break">
           {isAI ? (

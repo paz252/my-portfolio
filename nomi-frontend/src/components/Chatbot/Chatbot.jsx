@@ -13,7 +13,7 @@ import useSpeechRecognition from "./hooks/useSpeechRecognition";
 import { copyText, getTimestamp } from "./utils";
 import MetallicText from "../utils/MetallicText";
 
-export default function Chatbot({ guestName }) {
+export default function Chatbot() {
   const [messages, setMessages] = useState([]);
 
   const [inputValue, setInputValue] = useState("");
@@ -116,7 +116,6 @@ export default function Chatbot({ guestName }) {
         >
           <MessageList
             messages={messages}
-            guestName={guestName}
             copiedMessageIndex={copiedMessageIndex}
             onCopy={handleCopy}
             isLoading={isLoading}
