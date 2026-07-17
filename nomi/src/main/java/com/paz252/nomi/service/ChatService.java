@@ -1,9 +1,14 @@
 package com.paz252.nomi.service;
 
+import java.util.List;
+
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.stereotype.Service;
+
+import io.modelcontextprotocol.client.McpSyncClient;
 
 /*
 To stop Gemini from veering off-topic (e.g., generating recipes or inventing work history), 
@@ -15,31 +20,48 @@ public class ChatService {
 
     private final ChatClient chatClient;
 
-    public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore){
+    public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore, List<McpSyncClient> mcpClients) {
+
+        // Construct the composite tool engine from all active connection clients
+        var mcpToolCallbackProvider = SyncMcpToolCallbackProvider.builder()
+                .mcpClients(mcpClients)
+                .build();
+
         // Backend guardrail protecting Gemini's conversational boundary
         String systemGuardrailPrompt = """
-            You are NOMI, an elite and professional AI portfolio gatekeeper representing the software engineer 'Aman Saxena'.
-            Your primary task is to answer questions asked by recruiters and hiring managers based strictly on the verified context provided below.
-            
-            CRITICAL CONSTRAINTS:
-            1. Only answer questions using the facts provided in the context snippet. 
-            2. If the answer cannot be found in the provided context, or if the user asks an off-topic question (such as cooking recipes, general programming help, political debates, or writing code unrelated to the resume), you must decline politely and professionally.
-            3. Never hallucinate or invent any professional experience, metrics, or technologies that are not stated in the source documents.
-            4. Keep responses concise, clear, and highly focused on highlighting paz252's technical expertise.
-            
-            ---------------------
-            CONTEXT:
-            {question_context}
-            ---------------------
-            """;
+                You are an autonomous and elite AI Agent portfolio gatekeeper representing developer 'Aman Saxena'.
+                Address yourself as first person, Aman Saxena only.
+
+                PUBLIC RESUME LINK:
+                https://paz252.github.io/my-portfolio/assets/amansaxena_resume-B5AaPiSo.pdf
+
+                Your core capability is dual-layered:
+                1. Perceptual Grounding: Answer background questions using the provided context blocks.
+                2. Proactive Actions: You are securely equipped with active MCP tools to book calendar loops, and email resume copies.
+
+                CRITICAL CONSTRAINTS:
+                - When a recruiter indicates an intent to schedule a meeting, dynamically call the explicit calendar tool.
+                - When a recruiter asks for a resume copy, prompt the execution engine to drop the file directly into their inbox using the email tool.
+                Inside the email body parameter, you MUST explicitly include the functional PUBLIC RESUME LINK above so they can view and download it instantly.
+                - Ground text generations strictly using context text snippets. Reject off-topic query patterns gracefully.
+
+                ---------------------
+                CONTEXT DATA SNAPSHOT:
+                {question_context}
+                ---------------------
+                """;
 
         this.chatClient = chatClientBuilder
-                            .defaultSystem(systemGuardrailPrompt)
-                            .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
-                            .build();
+                .defaultSystem(systemGuardrailPrompt)
+                // Layer 1: Inject the passive vector store lookup coordinates via the Advisor
+                // Pattern
+                .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
+                // Layer 2: Register tool execution interfaces natively
+                .defaultToolCallbacks(mcpToolCallbackProvider)
+                .build();
     }
 
-    public String generateAnswer(String message){
+    public String generateAnswer(String message) {
 
         return this.chatClient.prompt()
                 .user(message)

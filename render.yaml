@@ -13,3 +13,5 @@ services:
         value: classpath:docs/resume-portfolio.md
       - key: GEMINI_API_KEY
         sync: false
+      - key: ZAPIER_MCP_KEY
+        sync: false
