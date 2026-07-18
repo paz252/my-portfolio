@@ -108,11 +108,10 @@ export default function Chatbot() {
         </div>
       </div>
 
-      <div ref={messagesContainerRef} className="chat-messages">
-        <div
-          className={`chat-messages-body ${
-            messages.length === 0 ? "chat-messages-empty" : ""
-          }`}
+      <div className="chat-messages">
+        <div ref={messagesContainerRef}
+          className={`chat-messages-body ${messages.length === 0 ? "chat-messages-empty" : ""
+            }`}
         >
           <MessageList
             messages={messages}
