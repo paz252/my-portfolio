@@ -5,9 +5,11 @@ import {
   Trophy,
   MapPin,
 } from "lucide-react";
+import MetallicText from "../utils/MetallicText";
 import { IoChevronDown } from "react-icons/io5";
 import "./About.css";
 import me from "../../assets/me.jpeg";
+import resumePDF from "../../assets/amansaxena_resume.pdf";
 
 const FACTS = [
   {
@@ -20,10 +22,10 @@ const FACTS = [
         <div className="edu-item">
           <span className="edu-degree">
             PG Diploma in Advanced Computing (2021)
-          </span><br/>
+          </span><br />
           <span className="edu-inst">
             Centre for Development of Advanced Computing (C-DAC), Pune
-          </span><br/>
+          </span><br />
           <span className="edu-agg">
             Aggregate: 83.17%
           </span>
@@ -34,10 +36,10 @@ const FACTS = [
         <div className="edu-item">
           <span className="edu-degree">
             B.Tech in Electrical & Electronics Engineering (2014-18)
-          </span><br/>
+          </span><br />
           <span className="edu-inst">
             Guru Gobind Singh Indraprastha University, Delhi
-          </span><br/>
+          </span><br />
           <span className="edu-agg">
             Aggregate: 74.24%
           </span>
@@ -78,7 +80,7 @@ export default function About() {
             </div>
 
             <div className="mono role-tag">
-              Fullstack Developer
+              <MetallicText>Fullstack Developer</MetallicText>
             </div>
           </div>
 
@@ -101,6 +103,14 @@ export default function About() {
                   I like using my strong backend skills and modern web technologies to solve real-world problems. I'm always looking for new ways to use intelligent systems in real-life situations.
                 </p>
               </div>
+
+              <a href={resumePDF}
+                download="Aman_Saxena_Resume.pdf"
+                className="btn btn-sm btn-outline-light d-flex align-items-center justify-content-center gap-2 download-resume-btn mt-4 mx-auto px-3 py-2"
+              >
+                <i className="bi bi-download"></i>
+                <span>Download Resume</span>
+              </a>
             </div>
           </div>
         </div>

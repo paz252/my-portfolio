@@ -129,7 +129,6 @@
 }
 
 .role-tag {
-  color: #a5b4fc;
   text-align: center;
   font-size: 1rem;
 }
@@ -143,6 +142,29 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   align-items: start;
+}
+
+.download-resume-btn {
+  color: #a5b4fc !important;
+  border-color: #a5b4fc !important;
+  border-radius: 14px !important; 
+  width: fit-content;
+}
+
+.card-dark:hover .download-resume-btn {
+  font-weight: bold !important;
+  border-color: rgba(165, 180, 252, 1);
+  box-shadow: 0 0 0 1px rgba(165, 180, 252, 0.12), 0 0 24px rgba(165, 180, 252, 0.14);
+  transform: translateY(-4px);
+}
+
+.download-resume-btn:hover {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.download-resume-btn .bi-download {
+  -webkit-text-stroke: 0.4px currentColor;
 }
 
 /* ==========================================================
@@ -288,118 +310,6 @@
 }
 
 /* ==========================================================
-   LOCATION
-========================================================== */
-
-.grid-bg {
-  background-image:
-    linear-gradient(#1b2129 1px, transparent 1px),
-    linear-gradient(90deg, #1b2129 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.location-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.location-line {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.location-city {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.coords {
-  margin-top: 8px;
-  color: #8b95a1;
-  font-size: 12px;
-}
-
-.location-sub {
-  margin-top: 20px;
-  color: #8b95a1;
-  line-height: 1.7;
-}
-
-.availability-badge {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(165, 180, 252, 0.25);
-  background: #12161b;
-  color: #a5b4fc;
-  font-size: 11px;
-  letter-spacing: .06em;
-  height: fit-content;
-}
-
-/* ==========================================================
-   DOT
-========================================================== */
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #a5b4fc;
-}
-
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(165, 180, 252, .45);
-  }
-
-  50% {
-    box-shadow: 0 0 0 6px rgba(165, 180, 252, 0);
-  }
-}
-
-@keyframes cometBorder {
-  0% {
-    background-position: 200% 0;
-    opacity: 0.3;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    background-position: -200% 0;
-    opacity: 0.3;
-  }
-}
-
-/* ==========================================================
-   CURSOR
-========================================================== */
-
-.cursor {
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* ==========================================================
    ACCESSIBILITY
 ========================================================== */
 
@@ -420,10 +330,6 @@
 
   .about-bottom-row {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .location-row {
-    flex-direction: column;
   }
 
   .avatar {

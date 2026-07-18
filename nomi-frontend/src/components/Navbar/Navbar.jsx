@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
 import MetallicText from "../utils/MetallicText";
-import resumePDF from "../../assets/amansaxena_resume.pdf";
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
@@ -91,15 +90,6 @@ export default function Navbar() {
         <span></span>
         <span></span>
       </button>
-
-      <a href={resumePDF}
-        download="Aman_Saxena_Resume.pdf"
-        className="btn btn-sm btn-outline-light d-flex align-items-center fw-bold gap-1 download-resume-btn"
-      >
-        <i className="bi bi-download"></i>
-        <span className="download-text">Download</span>
-        <span>Resume</span>
-      </a>
 
       {/* Mobile dropdown menu */}
       <div className={`mobile-menu ${menuOpen ? "show" : ""}`}>
