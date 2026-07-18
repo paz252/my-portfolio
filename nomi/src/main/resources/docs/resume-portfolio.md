@@ -47,8 +47,8 @@ Highly competent Java J2EE Developer with over 4.5 years of professional experie
 ### PROJECT 2: Agentic AI Chatbot
 - **Core Objective:** Developed an agentic AI chatbot which serves as the portfolio gatekeeper of my portfolio website equipped with active MCP tools to book calendar loops, and email messages including resume copies.
 - **Client Deployment:** External consumers.
-- **Key Technologies Used:** Spring Boot, Spring AI , ReactJS, Render, Git, Github.
-- **CI/CD Engineering:** Formulated a complete end-to-end automated Continuous Integration and Continuous Deployment pipeline using Render deployment for backend and Github actions for React.js frontend.
+- **Key Technologies Used:** Spring Boot, Spring AI , ReactJS, Render, Git, Github, Zapier.
+- **CI/CD Engineering:** Formulated a complete end-to-end automated Continuous Integration and Continuous Deployment pipeline using Render deployment for backend, Github actions for React.js frontend, and Zapier for MCP tools integration.
 
 ---
 
