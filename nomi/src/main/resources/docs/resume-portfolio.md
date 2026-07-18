@@ -2,13 +2,15 @@
 
 ## BIOGRAPHICAL & CONTACT DETAILS
 - **Full Name:** Aman Saxena
-- **Role Title:** Java J2EE Software Engineer / Project Engineer
+- **Role Title:** FullStack Developer / Java J2EE Software Engineer / Project Engineer
 - **Contact Number:** +91-9582780605
 - **Email Address:** saxenaaman555@gmail.com
 - **LinkedIn:** linkedin.com/in/amansaxena581
 - **GitHub Identifier:** paz252
+- **Date Of Birth:** 25th February, 1995
 - **Location:** B-12, Sterling Horizon Society, Sus-Pashan Road, Pune, Maharashtra 411021
 - **Languages:** English, Hindi
+- **Marital Status** Married
 
 ---
 
@@ -20,16 +22,37 @@ Highly competent Java J2EE Developer with over 4.5 years of professional experie
 ## CORE TECHNICAL SKILLS MATRIX
 - **Backend Engineering:** Core Java, J2EE, Spring Boot, Spring AI, Microservices Architecture, RESTful API Design
 - **Frontend Development:** ReactJS, Module Federation, JavaScript (ES6+), HTML5, CSS3, Modern UI Orchestration
-- **DevOps, Cloud & Infrastructure:** Kubernetes Cluster Management, Docker Containerization, CI/CD Pipelines
+- **DevOps, Infrastructure:** Kubernetes, Docker Containerization, System Design, CI/CD Pipelines
 - **Observability & Monitoring:** OpenTelemetry Framework, Distributed Tracing, Grafana Dashboard Visualization
-- **Database Systems:** SQL, Relational Database Management Systems (RDBMS)
-- **Tools & Version Control:** Git, Maven, Linux System Administration
+- **Database Systems:** MySQL
+- **Tools & Version Control:** Git, GitOps
 
 ---
 
 ## DETAILED PROJECT PORTFOLIO
 
-### PROJECT 1: NLP MICROGRID
+### PROJECT 1: CIPIE (IP Catalyst)
+- **Core Objective:** Centre for Intellectual Property & Innovation Exchange - A MeitY Initiative Enabling Innovation, Technology Transfer & Commercialization for startups, MSMEs, MeitY R&D societies and grantee institutions.
+- **Client Deployment:** Internal and external institutional consumers.
+- **Key Technologies Used:** Core Java, Spring Boot, Microservices, Kubernetes, Docker, ReactJS, Kafka, OpenTelemetry, Prometheus,Grafana, Git.
+
+#### Roles, Responsibilities & Architectural Impact:
+- **Cluster Orchestration:** Collaborated with a team to develop a robust distributed system orchestrated by Kubernetes in the e-governance domain for CIPIE portal.
+- **Enhanced System Design:** Integrated Kafka for asynchronously handling utility services like email and notifications.
+- **Enterprise Observability:** Integrated and deployed the OpenTelemetry Framework across all microservices to automatically capture critical monitoring telemetry, traces, and metrics, generating unified visual insights via Grafana dashboards.
+- **CI/CD Engineering:** Formulated a complete end-to-end automated Continuous Integration and Continuous Deployment pipeline for the cluster, driving down release cycle timelines and drastically improving systemic resilience.
+
+---
+
+### PROJECT 2: Agentic AI Chatbot
+- **Core Objective:** Developed an agentic AI chatbot which serves as the portfolio gatekeeper of my portfolio website equipped with active MCP tools to book calendar loops, and email messages including resume copies.
+- **Client Deployment:** External consumers.
+- **Key Technologies Used:** Spring Boot, Spring AI , ReactJS, Render, Git, Github.
+- **CI/CD Engineering:** Formulated a complete end-to-end automated Continuous Integration and Continuous Deployment pipeline using Render deployment for backend and Github actions for React.js frontend.
+
+---
+
+### PROJECT 3: NLP MICROGRID
 - **Core Objective:** A highly resilient, Kubernetes-orchestrated enterprise platform designed to unify all standalone NLP applications and downstream language services into a single, cohesive marketplace portal.
 - **Client Deployment:** Internal and external institutional consumers.
 - **Key Technologies Used:** Core Java, Spring Boot, Microservices, Kubernetes, Docker, ReactJS, Module Federation, OpenTelemetry, Grafana, Git.
@@ -42,10 +65,10 @@ Highly competent Java J2EE Developer with over 4.5 years of professional experie
 
 ---
 
-### PROJECT 2: TRANSLITERATION ENGINE FOR DEPARTMENT OF LAND RESOURCES
+### PROJECT 4: TRANSLITERATION ENGINE FOR DEPARTMENT OF LAND RESOURCES
 - **Core Objective:** A mission-critical, enterprise NLP application engineered to execute high-throughput machine transliteration. The engine ingests English textual parameters and translates phonetic spellings into any of the 22 scheduled Indian regional languages and vice versa.
 - **Major Clients:** Department of Land Resources (Government of India) & Election Commission of India.
-- **Key Technologies Used:** Java, Spring Boot, RESTful APIs, ReactJS, Enterprise Server Architectures, Linux, Git.
+- **Key Technologies Used:** Java, Spring Boot, RESTful APIs, ReactJS, Enterprise Server Architectures, Git.
 
 #### Roles, Responsibilities & Architectural Impact:
 - **Full-Stack Implementation:** Spearheaded the end-to-end development of the engine, single-handedly bridging robust backend logic in Spring Boot with highly responsive frontends built in ReactJS.
@@ -54,10 +77,10 @@ Highly competent Java J2EE Developer with over 4.5 years of professional experie
 
 ---
 
-### PROJECT 3: NLP NAMESCORE ENGINE
+### PROJECT 5: NLP NAMESCORE ENGINE
 - **Core Objective:** An advanced Natural Language Processing engine structured to mathematically evaluate and compare phonetic similarity across disparate linguistic scripts based on automated machine transliteration models.
 - **Major Clients:** Karnataka Resident Data Hub (KRDH) and Ernst & Young (EY).
-- **Key Technologies Used:** Core Java, Spring Boot, REST APIs, ReactJS, Mathematical Similarity Scoring Algorithms.
+- **Key Technologies Used:** Core Java, Spring Boot, REST APIs, ReactJS.
 
 #### Roles, Responsibilities & Architectural Impact:
 - **API Development:** Designed and deployed highly optimized RESTful web services that accept varying string pairs and output an accurate, low-latency phonetic matching metric (Similarity Score).

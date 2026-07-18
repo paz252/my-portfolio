@@ -18,53 +18,71 @@ we pass a highly restricted System Prompt inside Spring AI's native orchestratio
 @Service
 public class ChatService {
 
-    private final ChatClient chatClient;
+        private final ChatClient chatClient;
 
-    public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore, List<McpSyncClient> mcpClients) {
+        public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore,
+                        List<McpSyncClient> mcpClients) {
 
-        // Construct the composite tool engine from all active connection clients
-        var mcpToolCallbackProvider = SyncMcpToolCallbackProvider.builder()
-                .mcpClients(mcpClients)
-                .build();
+                // Construct the composite tool engine from all active connection clients
+                var mcpToolCallbackProvider = SyncMcpToolCallbackProvider.builder()
+                                .mcpClients(mcpClients)
+                                .build();
 
-        // Backend guardrail protecting Gemini's conversational boundary
-        String systemGuardrailPrompt = """
-                You are Aman Saxena, an autonomous and elite AI Agent portfolio gatekeeper representing developer 'Aman Saxena'.
+                var callbacks = mcpToolCallbackProvider.getToolCallbacks();
+                System.out.println("Discovered MCP tools: " + callbacks.length);
+                for (var cb : callbacks) {
+                        System.out.println(" - " + cb.getToolDefinition().name());
+                }
 
-                PUBLIC RESUME LINK:
-                https://paz252.github.io/my-portfolio/assets/amansaxena_resume-B5AaPiSo.pdf
+                // Backend guardrail protecting Gemini's conversational boundary
+                String systemGuardrailPrompt = """
+                                You are Aman Saxena, an autonomous and elite AI Agent portfolio gatekeeper representing developer 'Aman Saxena'.
 
-                Your core capability is dual-layered:
-                1. Perceptual Grounding: Answer background questions using the provided context blocks.
-                2. Proactive Actions: You are securely equipped with active MCP tools to book calendar loops, and email resume copies.
+                                PUBLIC RESUME LINK:
+                                https://paz252.github.io/my-portfolio/assets/amansaxena_resume-B5AaPiSo.pdf
 
-                CRITICAL CONSTRAINTS:
-                - When a recruiter indicates an intent to schedule a meeting, dynamically call the explicit calendar tool.
-                - When a recruiter asks for a resume copy, prompt the execution engine to drop the file directly into their inbox using the email tool.
-                Inside the email body parameter, you MUST explicitly include the functional PUBLIC RESUME LINK above so they can view and download it instantly.
-                - Ground text generations strictly using context text snippets. Reject off-topic query patterns gracefully.
+                                Your core capability is dual-layered:
+                                1. Perceptual Grounding: Answer background questions using the provided context blocks.
+                                2. Proactive Actions: You are securely equipped with active MCP tools to book calendar loops, and email messages including resume copies.
 
-                ---------------------
-                CONTEXT DATA SNAPSHOT:
-                {question_context}
-                ---------------------
-                """;
+                                CRITICAL CONSTRAINTS:
+                                - When a recruiter indicates an intent to schedule a meeting, dynamically call the explicit calendar tool.
+                                - When a recruiter asks for a resume copy, prompt the execution engine to drop the file directly into their inbox using the email tool.
+                                Inside the email body parameter, you MUST explicitly include the functional PUBLIC RESUME LINK above so they can view and download it instantly.
+                                - Ground text generations strictly using context text snippets. Reject off-topic query patterns gracefully.
+                                - Keep responses short and concised until asked to elaborate in detail.
 
-        this.chatClient = chatClientBuilder
-                .defaultSystem(systemGuardrailPrompt)
-                // Layer 1: Inject the passive vector store lookup coordinates via the Advisor
-                // Pattern
-                .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
-                // Layer 2: Register tool execution interfaces natively
-                .defaultToolCallbacks(mcpToolCallbackProvider)
-                .build();
-    }
+                                ---------------------
+                                CONTEXT DATA SNAPSHOT:
+                                {question_context}
+                                ---------------------
+                                """;
 
-    public String generateAnswer(String message) {
+                this.chatClient = chatClientBuilder
+                                .defaultSystem(systemGuardrailPrompt)
+                                // Layer 1: Inject the passive vector store lookup coordinates via the Advisor
+                                // Pattern
+                                .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
+                                // Layer 2: Register tool execution interfaces natively
+                                .defaultToolCallbacks(mcpToolCallbackProvider)
+                                .build();
+        }
 
-        return this.chatClient.prompt()
-                .user(message)
-                .call()
-                .content();
-    }
+        public String generateAnswer(String message) {
+
+                var response = this.chatClient.prompt()
+                                .user(message)
+                                .call()
+                                .chatResponse();
+
+                var toolCalls = response.getResult().getOutput().getToolCalls();
+                if (toolCalls.isEmpty()) {
+                        System.out.println("No tool call triggered for message: " + message);
+                } else {
+                        toolCalls.forEach(tc -> System.out
+                                        .println("Tool invoked: " + tc.name() + " | args: " + tc.arguments()));
+                }
+
+                return response.getResult().getOutput().getText();
+        }
 }
