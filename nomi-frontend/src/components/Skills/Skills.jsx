@@ -16,7 +16,6 @@ import {
     SiMysql,
     SiGit,
 } from "react-icons/si";
-import { SiZapier } from "react-icons/si";
 import { Boxes, Network, GitBranch } from "lucide-react";
 
 const STACK = [
@@ -36,8 +35,7 @@ const STACK = [
     { name: "Elasticsearch", Icon: SiElasticsearch, iconColor: "#005571" },
     { name: "MySQL", Icon: SiMysql, iconColor: "#1E9BD6" },
     { name: "Git", Icon: SiGit, iconColor: "#F05032" },
-    { name: "GitOps", Icon: GitBranch, iconColor: "#4FD8A8" },
-    { name: "Zapier", Icon: SiZapier, iconColor: "#FF4A00" },
+    { name: "GitOps", Icon: GitBranch, iconColor: "#4FD8A8" }
 ];
 
 const half = Math.ceil(STACK.length / 2);
