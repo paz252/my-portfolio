@@ -111,3 +111,9 @@ Highly competent Java J2EE Developer with over 4.5 years of professional experie
 ## PROFESSIONAL RECOGNITIONS & ACHIEVEMENTS
 - **Award:** Employee of the Month (July, 2022)
 - **Context:** Commended at C-DAC Pune for exceptional dedication, rapid technical delivery, and architectural contribution towards core infrastructure deployment workflows.
+
+## HOBBIES
+- Chess
+- Snooker
+- Badminton
+- Bike Riding
